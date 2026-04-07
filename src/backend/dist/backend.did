@@ -1,0 +1,49 @@
+type WorkoutLog = 
+ record {
+   completedAt: Time;
+   dayId: nat;
+   id: text;
+   selectedExercises: vec SelectedExercise;
+ };
+type WorkoutDay = 
+ record {
+   id: nat;
+   name: text;
+   patterns: vec MovementPattern;
+ };
+type Time = int;
+type SelectedExercise = 
+ record {
+   exerciseId: text;
+   patternId: text;
+ };
+type RepType = 
+ variant {
+   amrap;
+   normal;
+   timed;
+ };
+type MovementPattern = 
+ record {
+   exercises: vec Exercise;
+   id: text;
+   name: text;
+ };
+type Exercise = 
+ record {
+   id: text;
+   name: text;
+   notes: opt text;
+   repType: RepType;
+   reps: text;
+   sets: nat;
+ };
+service : {
+  deleteWorkoutLog: (logId: text) -> ();
+  getProgram: () -> (vec WorkoutDay) query;
+  getWorkoutLogs: () -> (vec WorkoutLog) query;
+  logWorkout: (dayId: nat, selectedExercises: vec record {
+                                                    text;
+                                                    text;
+                                                  }) -> (text);
+}

@@ -1,0 +1,45 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Exercise__236149148 =
+  {
+    id : Text;
+    name : Text;
+    notes : ?Text;
+    repType : RepType__1051074592;
+    reps : Text;
+    sets : Nat
+  };
+type Int__270357528 = Int__616954475;
+type Int__616954475 = Int;
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MovementPattern__564417006 =
+  {exercises : [Exercise__236149148]; id : Text; name : Text};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type RepType__1051074592 = {#amrap; #normal; #timed};
+type SelectedExercise__194730566 = {exerciseId : Text; patternId : Text};
+type Time__796480547 = Int__270357528;
+type Time__900049286 = Time__796480547;
+type WorkoutDay__481702897 =
+  {id : Nat; name : Text; patterns : [MovementPattern__564417006]};
+type WorkoutLog__777369623 =
+  {
+    completedAt : Time__900049286;
+    dayId : Nat;
+    id : Text;
+    selectedExercises : [SelectedExercise__194730566]
+  };
+actor {
+  stable var logIdCounter : Nat;
+  stable programData : [WorkoutDay__481702897];
+  stable workoutLogs :
+    {
+      var root : Node__46230540<Text, WorkoutLog__777369623>;
+      var size : Nat__490723111
+    }
+};
